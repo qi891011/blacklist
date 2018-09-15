@@ -15,6 +15,8 @@ git clone https://github.com/top-think/framework thinkphp
 
 # 欢迎大家积极曝光不良公司,让行业人远离!
 
-曝光群:860930815
+# 曝光群:860930815
+
+# ※ ※ 未经允许不得上线运营
 
 
