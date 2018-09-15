@@ -1,0 +1,192 @@
+{include file='public/header'}
+<nav class="breadcrumb">
+    <div class="wap-container">
+        <div class="container">
+            <i class="Hui-iconfont Hui-iconfont-home"></i>
+            <a href="#" class="c-primary">首页</a>
+            <span class="c-999 en">&gt;</span>
+            <span class="c-666">曝光不良公司</span>
+        </div>
+    </div>
+</nav>
+<section class="container">
+    <p></p>
+    <div class="panel panel-default">
+        <div class="panel-header">曝光不良公司</div>
+        <div class="panel-body">
+            <form action="" method="post" class="form form-horizontal responsive"  id="demoform">
+                <div class="row clearfix">
+                    <label class="form-label col-xs-3">所在城市：</label>
+                    <div class="formControls col-xs-8">
+                        <div class="row clearfix" style="margin-top:0">
+                            <div class="col-xs-6">
+                                <span class="select-box">
+                                    <select class="select" name="address" id="address">
+                                        <option value="" selected>选择城市</option>
+                                        <option value="1">北京</option>
+                                        <option value="2">上海</option>
+                                        <option value="3">广州</option>
+                                        <option value="4">深圳</option>
+                                        <option value="5">杭州</option>
+                                    </select>
+                                </span>
+                            </div>
+                            <div class="col-xs-6">
+                                <span class="select-box">
+                                    <select class="select" size="1" name="city" id="city">
+                                        <option value="" selected>请选择区域</option>
+
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row cl">
+                    <label class="form-label col-xs-3">公司名称：</label>
+                    <div class="formControls col-xs-8">
+                        <input type="text" class="input-text" placeholder="请填写公司全称"  name="companyname" id="companyname">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-3">办公地址：</label>
+                    <div class="formControls col-xs-8">
+                        <input type="text" class="input-text" autocomplete="off" placeholder="" name="addr" id="addr">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-3">您的姓名：</label>
+                    <div class="formControls col-xs-8">
+                        <input type="text" class="input-text"  name="username" placeholder="我们将做加密处理 非必填" id="username">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-3">手机：</label>
+                    <div class="formControls col-xs-8">
+                        <input type="text" class="input-text" autocomplete="off" placeholder="我们将做加密处理 非必填" name="telephone" id="telephone">
+                    </div>
+                </div>
+
+
+                <!--<div class="row cl">-->
+                    <!--<label class="form-label col-xs-3">附件：</label>-->
+                    <!--<div class="formControls col-xs-8">-->
+								<!--<span class="btn-upload form-group">-->
+								<!--<input class="input-text upload-url" type="text" name="uploadfile-2" id="uploadfile-2" readonly style="width:200px">-->
+								<!--<a href="javascript:void();" class="btn btn-primary upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>-->
+								<!--<input type="file" multiple name="file-2" class="input-file">-->
+								<!--</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+                <div class="row cl">
+                    <label class="form-label col-xs-3">公司网址：</label>
+                    <div class="formControls col-xs-8">
+                        <input type="text" class="input-text" placeholder="http://  非必填" name="website" id="website">
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-3">曝光事由：</label>
+                    <div class="formControls col-xs-8">
+                        <textarea cols="" rows="" class="textarea" name="content" id="content"  placeholder="说点什么...最少输入10个字符"></textarea>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <div class="col-xs-8 col-xs-offset-3">
+                        <input class="btn btn-primary"  id='sub' type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</section>
+{include file='public/footer'}
+
+<script>
+    $(function(){
+        //初始化数据
+        $("#address").change(function(){  //监听下拉列表的change事件
+            var address = $(this).val();  //获取下拉列表选中的值
+            //发送一个post请求
+            $.ajax({
+                type:'post',
+                url:"{:url('Index/district')}",
+                data:{key:address},
+                dataType:'json',
+                success:function(data){  //请求成功回调函数
+                    var status = data.status; //获取返回值
+                    var address = data.data;
+                    if(status == 200){  //判断状态码，200为成功
+                        var option = '';
+                        for(var i=0;i<address.length;i++){  //循环获取返回值，并组装成html代码
+                            option +='<option>'+address[i]+'</option>';
+                        }
+                    }else{
+                        var option = '<option>请选择城市</option>';  //默认值
+                    }
+
+                    $("#city").html(option);  //js刷新第二个下拉框的值
+                },
+            });
+        });
+    });
+
+    $("#demoform").validate({
+        rules:{
+
+            companyname:{
+                required:true,
+                minlength:6,
+            },
+            addr:{
+                required:true,
+                minlength:6,
+            },
+            username:{
+                required:false,
+                minlength:2,
+                maxlength:16
+            },
+            telephone:{
+                required:false,
+                isMobile:true,
+            },
+
+            website:{
+                required:false,
+                url:true,
+            },
+            content:{
+                minlength:10,
+                maxlength:200,
+            }
+        },
+        onkeyup:false,
+        focusCleanup:true,
+        success:"valid",
+        submitHandler:function(form){
+            $(form).ajaxSubmit({
+                type:'post',
+                dataType: "json",
+                url: "{:url('Index/doExposure')}",
+                success: function(e){
+                    layer.msg(e.codeMsg);
+                },
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+                    layer.msg(errorThrown);
+                }
+            });
+        }
+    });
+
+    //字数统计
+    $(".textarea").Huitextarealength({
+        minlength:10,
+        maxlength:200.
+    });
+
+
+</script>

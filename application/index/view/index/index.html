@@ -1,0 +1,112 @@
+{include file='public/header'}
+
+    <div class="wap-container">
+        <div id="slider-3">
+            <div class="slider">
+                <div class="bd">
+                    <ul>
+                        <li>
+                            <img src="/static/temp/banner1.jpg">
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <nav class="breadcrumb">
+            <div class="container">
+                <i class="Hui-iconfont">&#xe67f;</i>
+                <a href="/" class="c-primary">首页</a>
+            </div>
+        </nav>
+        <div class="container ui-sortable">
+            <h1>搜一搜,远离黑公司</h1>
+            <div class="Huialert Huialert-error">
+                <i class="Hui-iconfont">&#xe6a6;</i>
+                <h4>所有内容均为网友发布 , 数据仅供参考 , 本站不负任何法律责任 !! </h4>
+            </div>
+            <form action="{:url('Index/index')}" method="get">
+                <input type="text" placeholder="搜索公司" class="input-text radius size-M" name="company">
+                <input class="btn btn-primary"  id='sub' type="submit" value="&nbsp;&nbsp;搜索&nbsp;&nbsp;">
+            </form>
+            <p></p>
+
+
+            <div class="panel panel-default mt-20">
+                <div class="panel-header clearfix">
+                    <span class="f-l">最新曝光</span>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-border table-bordered table-bg">
+                        <thead>
+                        <tr>
+                            <th width="30%">公司名称</th>
+                            <th width="50%">地址</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {if $type==0}
+                        {foreach $ret as $key=>$vo }
+                        <tr>
+                            <td>{$vo.companyname}</td>
+                            <td>{$vo.addr}</td>
+                            <td>
+                                <span class="detail"> <a>详情</a></span>
+                                <input type="hidden" class="id" value="{$vo.id}">
+                            </td>
+                        </tr>
+                        {/foreach}
+                        {else /}
+                        <tr>
+                            <td colspan="3">没有找到匹配的记录</td>
+                        </tr>
+                        {/if}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        {include file='public/footer'}
+    </div>
+</div>
+
+</body>
+<script>
+    $.Huitotop(); //返回顶部
+
+
+    $(function () {
+        $(".detail").click(function () {
+            var id = $(this).parent().find('.id').val();
+            $.ajax({
+                type:'post',
+                url :"{:url('View/details')}",
+                data:{id:id},
+                dataType:'json',
+
+                beforeSend: function () {
+                    layer.load(1);
+                },
+                success:function (e) {
+                    console.log(e);
+                    layer.closeAll('loading');
+                    layer.open({
+                        type: 1,
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['420px', '240px'], //宽高
+                        content: e.data
+                    });
+                },
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+                    layer.msg(errorThrown);
+                }
+            });
+        });
+    });
+
+
+</script>
+
