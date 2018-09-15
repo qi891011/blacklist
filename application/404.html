@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/static/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="/staticlib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/static/static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/lib/Hui-iconfont/1.0.8/iconfont.min.css" />
+    <link rel="alternate icon" type="image/png" href="/favicon.png">
+    <!--[if lt IE 9]>
+    <link href="/static/static/h-ui/css/H-ui.ie.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    <!--[if IE 6]>
+    <script type="text/javascript" src="/static/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <style type="text/css">
+        .ui-sortable .panel-header{ cursor:move}
+    </style>
+    <title>IT 曝光台</title>
+    <meta name="keywords" content="关键词,5个左右,单个8汉字以内">
+    <meta name="description" content="网站描述，字数尽量空制在80个汉字，160个字符以内！">
+    <script type="text/javascript" src="/static/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/lib/jquery-ui/1.9.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/static/static/h-ui/js/H-ui.js"></script>
+    <script type="text/javascript" src="/static/lib/jquery.SuperSlide/2.1.1/jquery.SuperSlide.min.js"></script>
+    <script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+    <script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.min.js"></script>
+    <script type="text/javascript" src="/static/layer/layer.js"></script>
+</head>
+<body ontouchstart>
+<div class="sideBox">
+    <ul class="nav navbar-nav pt-20">
+        <li><a href="{:url('Index/exposure')}">曝光不良公司</a></li>
+        <li><a href="/">免责声明</a></li>
+    </ul>
+</div>
+<div class="containBox">
+    <div class="containBox-bg"></div>
+    <header class="navbar-wrapper">
+        <div class="navbar navbar-black">
+            <div class="container-fluid cl">
+                <a class="logo navbar-logo f-l mr-10 hidden-xs" href="#">IT 曝光台</a>
+                <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="#">IT 曝光台</a>
+                <span class="logo navbar-slogan f-l mr-10 hidden-xs">简单 &middot; 免费 &middot; 曝光全网不良 IT 公司</span>
+                <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs JS-nav-toggle" href="javascript:;">&#xe667;</a>
+                <nav class="nav navbar-nav"  id="Hui-nav">
+                    <ul class="cl">
+                        <li class="current"><a href="/">首页</a></li>
+                        <li><a href="#">联系我们</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="navbar-userbar f-r hidden-xs hidden-sm" style="top: 0;right: 15px;margin-top: -35px">
+                    <input class="btn btn-danger radius" type="button" value="曝光不良公司" onClick="modaldemo()">
+                    <!--                    <input class="btn btn-success radius" type="button" value="登录">-->
+                    <!--                    <input class="btn btn-success radius" type="button" value="注册">-->
+                    <!--<input class="btn btn-primary radius" type="button" value="捐赠">-->
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+    <!--普通弹出层-->
+    <div id="modal-demo" class="modal fade middle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content radius">
+                <div class="modal-header">
+                    <h3 class="modal-title">免责声明</h3>
+                    <a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void();">×</a>
+                </div>
+                <div class="modal-body">
+                    <p>1.本网站信息均为用户自愿上传,本网站所提供的信息，只供参考之用,本站不承担任何法律责任。本网站不保证该等信息的准确性、有效性、及时性或完整性。</p>
+                    <p>2.本网站中的文章(包括转贴文章)的版权仅归原作者所有，若作者有版权声明的或文章从其它网站转载而附带有原所有站的版权声明者，其版权归属以附带声明为准;文章仅代表作者本人的观点，与本网站立场无关。</p>
+                    <p>3.本网站不保证向用户提供的外部链接的准确性和完整性，该外部链接指向的不由本站实际控制的任何网页上的内容，本网站对其合法性亦概不负责，亦不承担任何法律责任，本站内所有内容亦不表明本网站之观点或意见。</p>
+                    <p>4.凡以任何方式登陆本网站或直接、间接使用本网站资料者，视为自愿接受本网站声明的约束。</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="agree">同意</button>
+                    <button class="btn" data-dismiss="modal" aria-hidden="true" id="noagree">不同意</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function modaldemo(){
+            $("#modal-demo").modal("show")
+        }
+        $("#agree").click(function () {
+            window.location.href = "{:url('index/exposure')}";
+        });
+
+        $("#noagree").click(function () {
+            window.location.href = '/';
+        });
+
+        /*左右滑动菜单*/
+        $(".JS-nav-toggle").click(function() {
+            $("body").addClass('sideBox-open');
+            $(".containBox-bg").height(_bodyHeight).show();
+        });
+        $(".containBox-bg").click(function() {
+            $(this).hide();
+            $("body").removeClass('sideBox-open');
+        });
+    </script>
+<article class="page-404 minWP text-c">
+    <p class="error-title"><i class="Hui-iconfont va-m">&#xe688;</i>
+        <span class="va-m"> 404</span>
+    </p>
+    <p class="error-description">不好意思，您访问的页面不存在~</p>
+    <p class="error-info">您可以：
+        <a href="javascript:;" onclick="history.go(-1)" class="c-primary">&lt; 返回上一页</a>
+        <span class="ml-20">|</span>
+        <a href="/" class="c-primary ml-20">去首页 &gt;</a>
+    </p>
+</article>
+
+    <footer class="footer mt-20">
+        <div class="container">
+            <nav class="footer-nav">
+                <a href="/">IT 曝光台 v1.0版</a>
+            </nav>
+        </div>
+    </footer>
+
+</html>
+</body>
