@@ -5,7 +5,7 @@ class Index
 {
     public function login()
     {
-        echo '222';
+        echo '222'; 
     }
 
 
