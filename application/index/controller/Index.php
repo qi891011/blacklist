@@ -12,7 +12,7 @@ class Index extends IsMethod
         self::chkGet();
         $company = trim(input('get.company/s'));
 
-        $ret = db('company')->where('companyname','like',"%$company%")->order('creat_time','desc')->limit(20)->select();
+        $ret = db('company')->where('companyname','like',"%$company%")->order('creat_time','desc')->limit(20)->Cache(true)->select();
         $type = 0;
         if(count($ret)==0){
             $type = 1;
