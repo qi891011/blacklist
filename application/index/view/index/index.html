@@ -42,7 +42,8 @@
                         <thead>
                         <tr>
                             <th width="30%">公司名称</th>
-                            <th width="50%">地址</th>
+                            <th width="30%">地址</th>
+                            <th width="20%">网址</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -52,8 +53,9 @@
                         <tr>
                             <td>{$vo.companyname}</td>
                             <td>{$vo.addr}</td>
+                            <td>{$vo.website|default='暂无'}</td>
                             <td>
-                                <span class="detail"> <a>详情</a></span>
+                                <span class="detail"> <a>曝光详情</a></span>
                                 <input type="hidden" class="id" value="{$vo.id}">
                             </td>
                         </tr>
