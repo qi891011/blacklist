@@ -1,0 +1,62 @@
+{include file='public/header'}
+
+<body>
+<input type="hidden" id="TenantId" name="TenantId" value="" />
+<div class="header"></div>
+<div class="loginWraper">
+    <div id="loginform" class="loginBox">
+        <form class="form form-horizontal">
+            <div class="row cl">
+                <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
+                <div class="formControls col-xs-8">
+                    <input id="name" name="name" type="text" placeholder="账户" class="input-text size-L">
+                </div>
+            </div>
+            <div class="row cl">
+
+                <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
+                <div class="formControls col-xs-8">
+                    <input id="pwd" name="pwd" type="password" placeholder="密码" class="input-text size-L">
+                </div>
+            </div>
+
+            <div class="row cl">
+                <div class="formControls col-xs-8 col-xs-offset-3">
+                    <input id="btn" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{include file='public/footer'}
+
+</body>
+<script>
+    $(function () {
+        $("#btn").click(function () {
+            var name = $("#name").val();
+            var pwd = $("#pwd").val();
+            $.ajax({
+                type:'post',
+                url:"{:url('dologin')}",
+                data:{name:name,pwd:pwd},
+                dataType:'json',
+                success:function (e) {
+                    if(e.code==200){
+                        layer.msg(e.codeMsg,function () {
+                            window.location.href = "{:url('Index/index')}";
+                        });
+
+                    }else{
+                        layer.msg(e.codeMsg);
+                    }
+                },
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+                    layer.msg(errorThrown);
+                }
+            });
+        });
+
+    });
+</script>
+</html>

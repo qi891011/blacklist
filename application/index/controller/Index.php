@@ -12,13 +12,24 @@ class Index extends IsMethod
         self::chkGet();
         $company = trim(input('get.company/s'));
 
-        $ret = db('company')->where('companyname','like',"%$company%")->order('creat_time','desc')->limit(20)->Cache(true)->select();
+        $ret = db('company')
+            ->where('companyname','like',"%$company%")
+            ->where(['status'=>1])
+            ->order('creat_time','desc')
+            ->field('id,companyname,addr,website,legal')
+            ->limit(20)
+            ->Cache(120)
+            ->select();
+        $count = db('company')
+            ->Cache(120)
+            ->count('id');
         $type = 0;
         if(count($ret)==0){
             $type = 1;
         }
         $this->assign('ret',$ret);
         $this->assign('type',$type);
+        $this->assign('count',$count);
         return $this->fetch();
     }
 
@@ -57,12 +68,13 @@ class Index extends IsMethod
     public function doExposure()
     {
         self::chkPost();
-        $insert['companyname'] = input('post.companyname/s');
-        $insert['addr'] = input('post.addr/s');
-        $insert['content'] = input('post.content/s');
-        $insert['website'] = input('post.website/s');
-        $username = input('post.username/s');
-        $telephone = input('post.telephone/s');
+        $insert['companyname'] = trim(input('post.companyname/s'));
+        $insert['addr'] = trim(input('post.addr/s'));
+        $insert['legal'] = trim(input('post.legal/s'));
+        $insert['content'] = trim(input('post.content/s'));
+        $insert['website'] = trim(input('post.website/s'));
+        $username = trim(input('post.username/s'));
+        $telephone = trim(input('post.telephone/s'));
         $insert['creat_time'] = time();
 
         if($username)

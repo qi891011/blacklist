@@ -35,15 +35,18 @@
 
             <div class="panel panel-default mt-20">
                 <div class="panel-header clearfix">
-                    <span class="f-l">最新曝光</span>
+                    <span class="f-l">最新曝光</span> &nbsp;&nbsp;
+
+                    (当前收录数据 <span class="label label-danger radius"> {$count} </span> 条)
                 </div>
                 <div class="panel-body">
                     <table class="table table-border table-bordered table-bg">
                         <thead>
                         <tr>
-                            <th width="30%">公司名称</th>
+                            <th width="20%">公司名称</th>
                             <th width="30%">公司地址</th>
-                            <th width="20%">网址</th>
+                            <th width="10%">公司法人</th>
+                            <th width="30%">网址</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -53,7 +56,13 @@
                         <tr>
                             <td>{$vo.companyname}</td>
                             <td>{$vo.addr}</td>
-                            <td>{$vo.website|default='暂无'}</td>
+                            <td>{$vo.legal | default='暂无'}</td>
+                            <td>
+                                {if $vo.website}
+                                    <a href="{$vo.website}" target="_blank">{$vo.website}</a>
+                                {else /}暂无
+                                {/if}
+                            </td>
                             <td>
                                 <span class="detail"> <a>曝光详情</a></span>
                                 <input type="hidden" class="id" value="{$vo.id}">

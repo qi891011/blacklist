@@ -56,6 +56,13 @@
                     </div>
                 </div>
                 <div class="row cl">
+                    <label class="form-label col-xs-3">公司法人：</label>
+                    <div class="formControls col-xs-8">
+                        <input type="text" class="input-text" autocomplete="off" placeholder="" name="legal" id="legal">
+                    </div>
+                </div>
+
+                <div class="row cl">
                     <label class="form-label col-xs-3">您的姓名：</label>
                     <div class="formControls col-xs-8">
                         <input type="text" class="input-text"  name="username" placeholder="我们将做加密处理 非必填" id="username">
@@ -145,6 +152,9 @@
                 required:true,
                 minlength:6,
             },
+            legal:{
+                minlength:2,
+            },
             username:{
                 required:false,
                 minlength:2,
@@ -160,6 +170,7 @@
                 url:true,
             },
             content:{
+                required:true,
                 minlength:10,
                 maxlength:200,
             }
